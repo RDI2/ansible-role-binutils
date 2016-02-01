@@ -1,0 +1,17 @@
+---
+# tasks file for binutils/install
+
+- name: create binutils dorectory
+  file: path={{ binutils_prefix }} state=directory owner=root group=root mode=0755
+
+- name: download binutils
+  get_url: url={{ binutils_url }} dest=/tmp/binutils-{{ binutils_version }}.tar.gz
+
+- name: extract binutils tarball
+  unarchive: copy=no src=/tmp/binutils-{{ binutils_version }}.tar.gz dest=/tmp creates=/tmp/binutils-{{ binutils_version }}
+
+- name: install binutils
+  shell: ./configure --prefix={{ binutils_prefix }} && make && make install
+  args:
+    chdir: /tmp/binutils-{{ binutils_version }}
+    creates: "{{ binutils_prefix}}/lib"

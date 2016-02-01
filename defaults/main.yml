@@ -1,0 +1,6 @@
+---
+# defaults file for binutils
+
+binutils_version: 2.26
+binutils_url: http://ftp.gnu.org/gnu/binutils/binutils-{{ binutils_version }}.tar.gz
+binutils_prefix: /opt/binutils/{{ binutils_version }}
